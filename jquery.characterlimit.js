@@ -14,7 +14,7 @@
             'keyup.characterLimit': this.updateResponse.bind(this)
         });
 
-        this.response = $('<div />').addClass('characterLimit_response').text(this.options.limit + ' Characters Remaining');
+        this.response = $('<div />').addClass('characterLimit_response').text(this.limit + ' Characters Remaining');
         this.field.after(this.response);
     };
 
@@ -23,12 +23,12 @@
 
     characterLimit.prototype.limitReached = function()
     {
-        return (this.field.val().length + 1) > this.options.limit;
+        return (this.field.val().length + 1) > this.limit;
     };
 
     characterLimit.prototype.updateResponse = function()
     {
-        var remaining = this.options.limit - this.field.val().length;
+        var remaining = this.limit - this.field.val().length;
 
         if (remaining > 10)
         {
@@ -49,5 +49,9 @@
             return new characterLimit(this, limit);
         });
     };
+     
+     $(document).ready(function(){
+         $('#tweet').characterLimit(10);
+     });
 
 })(jQuery);
