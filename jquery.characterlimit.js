@@ -1,9 +1,13 @@
 ;(function($){
 
-    var characterLimit = function(field, options)
+    var characterLimit = function(field, limit)
     {
         this.field = $(field);
-        $.extend(this.options, options);
+
+        if (typeof limit !== 'undefined')
+        {
+            this.limit = limit;
+        };
 
         this.field.bind({
             'keypress.characterLimit': this.updateResponse.bind(this),
@@ -38,11 +42,11 @@
         return this.response.text(remaining + ' Characters Remaining')
     };
 
-    $.fn.characterLimit = function(options)
+    $.fn.characterLimit = function(limit)
     {
         return this.each(function()
         {
-            return new characterLimit(this, options);
+            return new characterLimit(this, limit);
         });
     };
 
